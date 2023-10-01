@@ -11,21 +11,19 @@ from utils.checking import Checking
 class Test_create_user:
     test_data = [("Doron1", "1")]
 
-    expected_api_state = []
-
     @pytest.mark.parametrize("main_key,value", test_data)
     def test_create_new_user(self, main_key, value):
         print("\n---Method PUT-----\n")
 
-        result_put: Response = Users_api.create_new_user(main_key, value)
+        result_put: Response = Users_api.create_new_user(main_key, value)       # create new user
         check_put = result_put.json()
         main_key = check_put.get("main_key")
         Checking.check_status_code(result_put, 200)
         # token = json.loads(result_put.text)
         # print(list(token))
-        Checking.check_json_token(result_put, ['value', 'main_key'])
-        Checking.check_json_value(result_put, 'main_key', main_key)
-        Checking.check_json_value(result_put, 'value', value)
+        Checking.check_json_token(result_put, ['value', 'main_key'])    # check fields
+        Checking.check_json_value(result_put, 'main_key', main_key)     # check main_key field value
+        Checking.check_json_value(result_put, 'value', value)           # check value field value
         print(f"\nSingle user {main_key} created with PUT method.\n")
 
         print(" \n------Method GET after creating-----------\n")
@@ -57,7 +55,7 @@ class Test_create_user:
         Checking.check_status_code(result_delete, 200)
         token = json.loads(result_delete.text)
         print(list(token))
-        # Checking.check_json_token(result_delete, ['status'])
+
         Checking.check_json_value(result_delete, 'main_key', main_key)
         print(f"\nUser {main_key} deleted with DELETE method\n")
 

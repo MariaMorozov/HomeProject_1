@@ -11,9 +11,6 @@ from utils.checking import Checking
 class Test_create_several_user:
     test_data = [("1", "X1"), ("2", "X2"), ("3", "X3"), ("4", "X4")]
 
-    expected_api = [{"main_key": "1", "value": "X1"}, {"main_key": "2", "value": "X2"},
-                    {"main_key": "3", "value": "X3"}, {"main_key": "4", "value": "X4"}]
-
     @pytest.mark.parametrize("main_key,value", test_data)
     def test_create_all_users(self, main_key, value):
         print("\n---Method PUT-----\n")
